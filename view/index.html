@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>reader App</title>
+    <link rel="stylesheet" href="/static/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/all.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/index.css" type="text/css">
+</head>
+
+<body>
+    <div id="app" class="root" style="overflow:hidden;">
+        <% include include/header.html %>
+            <div class="f-cb" id="animationContent" style="width:200%;height:100%;transition-duration:0.5s; transform: translate3d(0px,0px,0px)" v-bind:style="animationContent">
+                <div class="contianer-warp" style="width:50%;float:left;">
+                    <div class="contianer-scroll">
+                        <% include include/index-top.html %>
+                            <% include include/index-hot.html %>
+                                <% include include/index-recommend.html %>
+                                    <% include include/index-female.html %>
+                                        <% include include/index-male.html %>
+                                            <% include include/index-free.html %>
+                                                <% include include/index-bottom.html %>
+                    </div>
+                </div>
+                <div class="" style="width:50%;float:left;">
+                    <% include include/index-shelf.html %>
+                </div>
+            </div>
+    </div>
+
+    <script src="/static/script/vue.js"></script>
+    <script src="/static/script/zepto.js"></script>
+    <script src="/static/script/pages/index.js"></script>
+</body>
+
+</html>

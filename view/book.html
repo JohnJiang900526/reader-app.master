@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>reader App</title>
+    <link rel="stylesheet" href="/static/css/reset.css" type="text/css">
+    <style>
+        .f-cb::after {
+            clear: both;
+            content: "";
+            display: block;
+            height: 0;
+            overflow: hidden;
+            visibility: hidden;
+        }
+        
+        .main-card {
+            border-bottom: 10px solid #f5f5f5;
+        }
+        
+        .main-card .u-folder {
+            padding-bottom: 1px;
+        }
+        
+        .main-card .u-cnt {
+            padding: 10px 14px;
+        }
+        
+        .u-book {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .u-book.-detail {
+            padding: 20px 14px;
+            display: table;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .book-cover {
+            width: 93px;
+            height: 124px;
+            float: left;
+        }
+        
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .book-info {
+            float: left;
+            padding-left: 15px;
+        }
+        
+        .book-info .title {
+            width: 150px;
+            margin-bottom: 13px;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #000;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+        
+        .book-info .authors {
+            color: #4b99a7;
+            font-size: 10px/12px a;
+        }
+        
+        .book-info .u-grade {
+            position: relative;
+        }
+        
+        .book-info .u-grade .read {
+            display: inline-block;
+            height: 20px;
+            line-height: 1em;
+            font-size: 12px;
+            padding-bottom: 5px;
+            position: absolute;
+            top: 5px;
+            right: 0;
+        }
+        
+        .book-info .u-grade .stats-content {
+            width: 60%;
+            height: 20px;
+            display: inline-block;
+        }
+        
+        .grade11 {
+            background: url("/static/img/stars.png") no-repeat;
+            background-position: 0 -156px;
+            background-size: 78px;
+        }
+        
+        .grade10 {
+            background: url("/static/img/stars.png") no-repeat;
+            background-position: 0 -140px;
+            background-size: 78px;
+        }
+        
+        .grade9 {
+            background: url("/static/img/stars.png") no-repeat;
+            background-position: 0 -124px;
+            background-size: 78px;
+        }
+        
+        .grade8 {
+            background: url("/static/img/stars.png") no-repeat;
+            background-position: 0 -107px;
+            background-size: 78px;
+        }
+        
+        .grade7 {
+            background: url("/static/img/stars.png") no-repeat;
+            background-position: 0 -92px;
+            background-size: 78px;
+        }
+        
+        .grade6 {
+            background: url("/static/img/stars.png") no-repeat;
+            background-position: 0 -76px;
+            background-size: 78px;
+        }
+        
+        .grade5 {
+            background: url("/static/img/stars.png") no-repeat;
+            background-position: 0 -59px;
+            background-size: 78px;
+        }
+        
+        .grade4 {
+            background: url("/static/img/stars.png") no-repeat;
+            background-position: 0 -44px;
+            background-size: 78px;
+        }
+        
+        .grade3 {
+            background: url("/static/img/stars.png") no-repeat;
+            background-position: 0 -28px;
+            background-size: 78px;
+        }
+        
+        .grade2 {
+            background: url("/static/img/stars.png") no-repeat;
+            background-position: 0 -11px;
+            background-size: 78px;
+        }
+        
+        .grade1 {
+            background: url("/static/img/stars.png") no-repeat;
+            background-position: 0 5px;
+            background-size: 78px;
+        }
+        
+        .book-info .price,
+        .book-info .count {
+            font-size: 14px;
+        }
+        
+        .book-tag.-serial {
+            border: 1px solid #00a0e9;
+            color: #55b4ec;
+            border-radius: 5px;
+            padding: 1px 3px;
+        }
+        
+        .book-dash .warp {
+            padding: 0 10px;
+        }
+        
+        .list {
+            width: 100%;
+            display: block;
+            box-sizing: border-box;
+        }
+        
+        .list li {
+            width: 50%;
+            float: left;
+        }
+        
+        .book-dash-action {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin: 0 auto;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .book-dash-action span {
+            color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .book-dash-action.active {
+            background-color: #f35d02;
+        }
+        
+        .book-dash-action.active span {
+            color: #ffffff;
+        }
+        
+        .u-folder .u-cnt .u-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+        }
+        
+        .new-charper .new-charper-text {
+            padding: 10px;
+            border-top: 1px solid #dddddd;
+            text-align: center;
+            color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .u-species {
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .u-species-header {
+            font: 18px/20px a;
+            color: rgba(0, 0, 0, 0.5);
+            margin-bottom: 15px;
+        }
+        
+        .species-label-text {
+            border: 1px solid #ddd;
+            padding: 4px 10px;
+            font: 14px/16px a;
+            margin: 0 10px 0 0;
+            border-radius: 5px;
+        }
+        
+        .species-label-text:nth-child(3n+1) {
+            background-color: #fbebe8;
+        }
+        
+        .species-label-text:nth-child(3n+2) {
+            background-color: #fcedda;
+        }
+        
+        .species-label-text:nth-child(3n+3) {
+            background-color: #e8f9db;
+        }
+        
+        .root {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .container-scroll {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+        }
+        
+        .book-page {
+            margin-bottom: 44px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="book" class="root" style="overflow:hidden;">
+        <% include include/common-header.html %>
+            <div class="container-scroll" style="width:100%;">
+                <div class="book-page">
+                    <section class="main-card">
+                        <div class="u-book -detail">
+                            <div class="book-cover">
+                                <img v-bind:src="item.cover" alt="{{item.title}}">
+                            </div>
+                            <div class="book-info">
+                                <h3 class="title">{{item.title}}</h3>
+                                <p class="authors">
+                                    <span class="authors">{{item.authors}}</span>
+                                </p>
+                                <div class="u-grade">
+                                    <div class="stats-content grade1">
+
+                                    </div>
+                                    <span class="read">{{comment_count}}评价</span>
+                                </div>
+                                <p class="price">价格：{{item.price}}书币/千字</p>
+                                <p class="count">
+                                    字数:{{item.word_count}}字
+                                    <span class="book-tag -serial" v-if="finish">已完结</span>
+                                    <span class="book-tag -serial" v-else>连载中</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="book-dash">
+                            <div class="warp">
+                                <ul class="list f-cb">
+                                    <li class="u-btn2" onclick="location.href= '/reader'">
+                                        <div class="book-dash-action active">
+                                            <span class="book-dash-text ">开始阅读</span>
+                                        </div>
+                                    </li>
+
+                                    <li class="u-btn2">
+                                        <div class="book-dash-action ">
+                                            <span class="book-dash-download ">开始下载</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="u-folder">
+                            <div class="u-cnt">
+                                <p class="u-text">
+                                    {{item.content}}
+                                </p>
+                            </div>
+
+                            <div class="new-charper">
+                                <p class="new-charper-text">
+                                    {{item.latest}}
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="main-card">
+                        <div class="u-species">
+                            <div class="u-species-header">
+                                <h3>类别标签</h3>
+                            </div>
+                            <div class="u-species-body">
+                                <p class="u-species-label">
+                                    <span class="species-label-text" v-for="tag in item.tags"> {{tag}} </span>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="main-card">
+                        <div class="u-book -detail" v-for="related in relateds">
+                            <div class="book-cover">
+                                <img v-bind:src="related.cover" alt="{{item.cover}}">
+                            </div>
+                            <div class="book-info">
+                                <h3 class="title">{{related.title}}</h3>
+                                <p class="authors">
+                                    <span class="authors">{{related.authors}}</span>
+                                </p>
+                                <div class="u-grade">
+                                    <div class="stats-content grade4">
+
+                                    </div>
+                                    <span class="read">{{related.comment_count}}评价</span>
+                                </div>
+                                <p class="price">价格：{{related.price}}书币/千字</p>
+                                <p class="count">
+                                    字数:{{related.word_count}}字
+                                    <span class="book-tag -serial" v-if="related.finish">已完结</span>
+                                    <span class="book-tag -serial" v-else>连载中</span>
+                                </p>
+                            </div>
+                        </div>
+
+                    </section>
+                </div>
+            </div>
+    </div>
+
+    <script src="/static/script/vue.js "></script>
+    <script src="/static/script/zepto.js "></script>
+    <script src="/static/script/pages/book.js "></script>
+</body>
+
+</html>

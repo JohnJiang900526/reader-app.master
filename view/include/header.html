@@ -1,0 +1,9 @@
+<div class="header-tab">
+    <div class="Swipe-tab Swipe-tab_2 f-cb">
+        <a href="javascript:" v-on:click="tabSwitch(0)" v-bind:class="{ 'Swipe-tab-on':tab_1_class}"></a>
+        <a href="javascript:" v-on:click="tabSwitch(1)" v-bind:class="{'Swipe-tab-on':tab_2_class}"></a>
+        <i style="transition-duration:0.5s;transform: translate3d(0px,0px,0px)" v-bind:style="animation"></i>
+    </div>
+    <em class="header-user"></em>
+    <em class="header-checkin"></em>
+</div>

@@ -1,0 +1,36 @@
+<style>
+    .top {
+        position: relative;
+        height: 44px;
+        border-bottom: 1px solid #dddddd;
+        font: 15px/45px a;
+        background-color: #EFEFF0;
+        color: rgba(0, 0, 0, 0.7);
+    }
+    
+    .top a {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+    
+    .top_book {
+        width: 42px;
+        height: 44px;
+        float: left;
+        display: block;
+        background: url(/static/img/back.png) no-repeat center;
+        background-size: 10px 16px;
+    }
+    
+    .top_home {
+        float: right;
+        width: 44px;
+        height: 44px;
+        background: url(/static/img/home.png) no-repeat center;
+        background-size: 16px;
+    }
+</style>
+<div class="top">
+    <a href="/" class="top_book"></a>
+    <span class="top_title"><%=nav%></span>
+    <a href="/" class="top_home"></a>
+</div>
